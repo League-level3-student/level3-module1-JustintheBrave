@@ -12,11 +12,28 @@ public class LongChipCompetition {
      * your search.
      */
     private static ArrayList<Beatle> theBeatles = new ArrayList<Beatle>();
-
+    static String winner;
+    static double big = 0;
+    static double next;
+    
     public static void main(String[] args) {
         LongChipCompetition lcc = new LongChipCompetition();
         
-       
+        lcc.initializeBeatles();
+        
+        ArrayList<Beatle> beatles = lcc.getTheBand();
+        for(Beatle b: beatles) {
+        	ArrayList<Chip> chip = b.getChips();
+        	for(Chip c: chip) {
+        		next = c.getLength();
+        		if(next>big) {
+        			big=next;
+        			winner = b.getName();
+        		}
+        	}
+        }
+        
+        System.out.println(winner);
     }
 
     private void initializeBeatles() {

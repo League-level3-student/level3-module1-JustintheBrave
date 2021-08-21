@@ -23,7 +23,7 @@ public class ArrayListRemove {
     // 1. Write a method that removes the dirt in the yard and returns the
     //    ArrayList
     public static ArrayList<Stuff> cleanOutTheYard( ArrayList<Stuff> yard ) {
-        
+        ArrayList<stuffIFoundInTheYard> s = new ArrayList<stuffIFoundInTheYard>();
         return yard;
     }
     
