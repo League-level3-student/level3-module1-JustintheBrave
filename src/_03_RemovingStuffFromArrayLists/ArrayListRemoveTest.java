@@ -10,7 +10,7 @@ import _03_RemovingStuffFromArrayLists.ArrayListRemove.Stuff;
 
 class ArrayListRemoveTest {
 
-    @Test
+	@Test
     void testRemove1() {
         ArrayListRemove yard = new ArrayListRemove();
         ArrayList<Stuff> stuffIFoundInTheYard = new ArrayList<Stuff>();
@@ -24,6 +24,7 @@ class ArrayListRemoveTest {
         // There should only be 2 worms left in the yard
         assertEquals(2, ArrayListRemove.cleanOutTheYard(stuffIFoundInTheYard).size());
     }
+
 
     @Test
     void testRemove2() {
