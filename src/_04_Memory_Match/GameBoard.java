@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -19,7 +20,8 @@ public class GameBoard extends JFrame implements ActionListener {
     static Card secondSelectedCard = null;
     
     // 1. Initialize TOTAL_CARDS to 2;
-    static int TOTAL_CARDS = 2;
+    static int TOTAL_CARDS = 52;
+    int test =1;
     
     ArrayList<Card> cards;
     
@@ -48,8 +50,10 @@ public class GameBoard extends JFrame implements ActionListener {
         // 3. Create TOTAL_CARDS number of objects each with a value of 1.
         //    Also, add action listeners to each Card object and then add each
         //    of the Card objects to the ArrayList of Cards.
+        Random ran = new Random();
         for(int i=0; i<TOTAL_CARDS; i++) {
-        	Card c = new Card(1);
+        	Card c = new Card(i);
+        	c.setFaceUpIcon(Card.cardImagesPath + (i+1) + ".png");
         	c.addActionListener(this);
         	cards.add(c);
         }
@@ -73,9 +77,11 @@ public class GameBoard extends JFrame implements ActionListener {
     }
 
     // 9. Fill in the drawCards method to draw all the cards in the ArrayList.
-    //    Run your code and verify 2 cards are displayed and the game works.
+    //    Run your code and verify 2 cards are displayed and the game works
     public void drawCards() {
-     
+    	for(Card c : cards) {
+    		c.draw();
+    	}
     }
     
     // 10. 
