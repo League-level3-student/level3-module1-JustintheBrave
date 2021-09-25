@@ -1,12 +1,15 @@
 package _05_Intro_To_Hash_Maps;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.HashMap;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class _02_LogSearch {
+public class _02_LogSearch implements ActionListener {
     /* 
      * Crate a HashMap of Integers for the keys and Strings for the values.
      * Create a GUI with three buttons. 
@@ -32,6 +35,7 @@ public class _02_LogSearch {
      *      etc...
      * 
      * When this is complete, add a fourth button to your window.
+     * 
      * Button 4: Remove Entry
      *      When this button is clicked, prompt the user to enter an ID using
      *      an input dialog.
@@ -44,16 +48,60 @@ public class _02_LogSearch {
 	static JFrame frame = new JFrame();
 	static JPanel panel = new JPanel();
 	static JButton add = new JButton();
+	static JButton search = new JButton();
+	static JButton view = new JButton();
+	static HashMap<Integer, String> studentRoster = new HashMap<Integer, String>();
 	
 	public static void main(String[] args) {
-		
+		_02_LogSearch l = new _02_LogSearch();
+		l.setup();
 	}
 
-	public static void setup() {
+	public void setup() {
 		panel.add(add);
+		panel.add(search);
+		panel.add(view);
+		
+		add.setText("Add a new entry");
+		search.setText("Search for entries");
+		view.setText("View Entries");
+		
 		frame.add(panel);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.pack();
+		frame.setSize(500, 500);
+		//frame.pack();
+		
+		add.addActionListener(this);
+		search.addActionListener(this);
+		view.addActionListener(this);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getSource()==add) {
+			String I = JOptionPane.showInputDialog("Enter your ID");
+			int ID = Integer.parseInt(I);
+			String newName = JOptionPane.showInputDialog("Enter your name");
+			studentRoster.put(ID, newName);
+		}
+		
+		if(e.getSource()==search) {
+			String searchId = JOptionPane.showInputDialog("Enter an ID");
+			int searched = Integer.parseInt(searchId);
+			
+			if(studentRoster.get(searched) != null) {
+					JOptionPane.showMessageDialog(null, "ID: " + searchId + " Name: " + studentRoster.get(searched));
+				}
+			else {
+					JOptionPane.showMessageDialog(null, "That entry does not exist.");
+				
+			}
+		}
+		
+		if(e.getSource()==view) {
+			
+		}
 	}
 }
