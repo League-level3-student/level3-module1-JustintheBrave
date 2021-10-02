@@ -101,7 +101,13 @@ public class _02_LogSearch implements ActionListener {
 		}
 		
 		if(e.getSource()==view) {
+			String s = "";
+			for(int i: studentRoster.keySet()) {
+				s+="ID: " + i + "Name: " + " " + studentRoster.get(i) + "\n";
 			
+			}
+			
+			JOptionPane.showMessageDialog(null,  s);
 		}
 	}
 }
