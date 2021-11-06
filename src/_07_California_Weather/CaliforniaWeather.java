@@ -2,7 +2,10 @@ package _07_California_Weather;
 
 import java.util.HashMap;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /*
  * OBJECTIVE:
@@ -31,21 +34,45 @@ import javax.swing.JOptionPane;
 
 public class CaliforniaWeather {
     
-	static Utilities u = new Utilities();
+	HashMap<String, WeatherData> weatherData = Utilities.getWeatherData();
+	
+	
 	
     void start() {
+    	
     	String City = JOptionPane.showInputDialog("What city do you want?");
-    	
     	String cond = JOptionPane.showInputDialog("What weather condition?");
+    	String temp1 = JOptionPane.showInputDialog("Minimum temperature");
+    	String temp2 = JOptionPane.showInputDialog("Maximum temperature?");
+    	int t1 = Integer.parseInt(temp1);
+    	int t2 = Integer.parseInt(temp2);
     	
-    	if(u.weatherData.get(cond) != null) {
-    		
+    	double min = Double.parseDouble(temp1);
+    	double max = Double.parseDouble(temp2);
+    	
+    	System.out.println("TEMPERATURE");
+    	
+    	for(String s: weatherData.keySet()) {
+    		WeatherData datum = weatherData.get(s);
+    		if(datum != null && datum.temperatureF > min && datum.temperatureF < max) {
+    			System.out.println(s);
+    		}
     	}
     	
-        HashMap<String, WeatherData> weatherData = Utilities.getWeatherData();
-        
+    	System.out.println("CONDITION");
+    	
+    	for(String s: weatherData.keySet()) {
+    		WeatherData datum = weatherData.get(s);
+    		if(datum != null && datum.weatherSummary.equalsIgnoreCase(cond)) {
+    			System.out.println(s);
+    		}
+    	}
+             
         // All city keys have the first letter capitalized of each word
-        String cityName = Utilities.capitalizeWords( City );
+    	
+    	System.out.println("CITY");
+    	
+        String cityName = Utilities.capitalizeWords(City);
         WeatherData datum = weatherData.get(cityName);
         
         if( datum == null ) {
@@ -53,5 +80,8 @@ public class CaliforniaWeather {
         } else {
             System.out.println(cityName + " is " + datum.weatherSummary + " with a temperature of " + datum.temperatureF + " F");
         }
+       
+        
+        
     }
 }
