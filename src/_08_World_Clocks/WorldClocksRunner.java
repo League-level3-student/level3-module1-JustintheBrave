@@ -5,6 +5,8 @@ package _08_World_Clocks;
  */
 public class WorldClocksRunner {
     public static void main(String[] args) {
-        new WorldClocks();
+        //new WorldClocks();
+        Clocks c = new Clocks();
+        c.gui();
     }
 }

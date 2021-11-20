@@ -7,6 +7,7 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.Timer;
@@ -18,7 +19,7 @@ import javax.swing.Timer;
  *    way to do this is to create a HashMap of city names and their
  *    corresponding time zones, e.g. HashMap<String, TimeZone>, then use each
  *    city's TimeZone to get the current date/time every second using a
- *    Timer object (see example code below).
+ *    Timer object (see example code below)
  * 
  * The code below is an example of how to print out a clock for San Diego.
  * Use the ClockUtilities class to find the time zone of each city, then use
@@ -38,7 +39,7 @@ public class WorldClocks implements ActionListener {
     ClockUtilities clockUtil;
     Timer timer;
     TimeZone timeZone;
-
+    
     JFrame frame;
     JPanel panel;
     JTextArea textArea;
@@ -51,7 +52,9 @@ public class WorldClocks implements ActionListener {
         clockUtil = new ClockUtilities();
 
         // The format for the city must be: city, country (all caps)
-        city = "Chicago, US";
+        city = JOptionPane.showInputDialog("What city? (City, Country)");
+        
+       // city = "San Diego, US";
         timeZone = clockUtil.getTimeZoneFromCityName(city);
         
         Calendar calendar = Calendar.getInstance(timeZone);
