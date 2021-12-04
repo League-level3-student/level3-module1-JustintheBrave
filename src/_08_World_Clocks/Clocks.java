@@ -94,6 +94,12 @@ public class Clocks implements ActionListener {
 	        clock2.setText(city2 + "\n" + dateStr + "\n" + timeStr2);
 	        clock3.setText(city3 + "\n" + dateStr + "\n" + timeStr3);
 	        frame.pack();
+	        
+	        
+	        if(e.getSource()==add) {
+	        	NewClocks clockk = new NewClocks();
+	        	clockk.AddClock();
+	        }
 	}
 	
 }
