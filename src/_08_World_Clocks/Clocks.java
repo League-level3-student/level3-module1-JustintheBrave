@@ -2,6 +2,7 @@ package _08_World_Clocks;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.TimeZone;
@@ -17,6 +18,8 @@ public class Clocks implements ActionListener {
 
 	Timer timer;
 	ClockUtilities clockUtil;
+	ArrayList<Calendar> newClocks = new ArrayList<Calendar>();
+	ArrayList<String> newClockNames = new ArrayList<String>();
 	
 	JFrame frame = new JFrame();
 	JPanel panel = new JPanel();
@@ -29,24 +32,26 @@ public class Clocks implements ActionListener {
 	String city = "San Diego, US";
 	String city2 = "New York, US";
 	String city3 = "Overland Park, US";
+	String newCity;
 	
 	String dateStr;
-	String dateStr2;
-	String dateStr3;
 	
     String timeStr;
     String timeStr2;
     String timeStr3;
+    String timeStr4;
     
     TimeZone timeZone;
     TimeZone timeZone2;
     TimeZone timeZone3;
+    TimeZone timeZone4;
 
 	public void gui() {
 		clockUtil = new ClockUtilities();
 		timeZone = clockUtil.getTimeZoneFromCityName("San Diego, US");
 		timeZone2 = clockUtil.getTimeZoneFromCityName("New York, US");
 		timeZone3 = clockUtil.getTimeZoneFromCityName("Overland Park, US");
+		
 		
 		
 		 Calendar calendar = Calendar.getInstance(timeZone);
@@ -71,6 +76,27 @@ public class Clocks implements ActionListener {
 	        timer.start();
 	}
 
+	public void AddClock() {
+		//new clock
+        Calendar c4 = Calendar.getInstance(timeZone4);
+        newClocks.add(c4);
+        
+	}
+	
+	public void DisplayClocks() {
+		for (int i = 0; i < newClockNames.size(); i++) {
+			Calendar c = newClocks.get(i);
+		
+			String militaryTime4 = c.get(Calendar.HOUR_OF_DAY) + ":" + c.get(Calendar.MINUTE) + ":" + c.get(Calendar.SECOND);
+	        String twelveHourTime4 = " [" + c.get(Calendar.HOUR) + ":" + c.get(Calendar.MINUTE) + ":" + c.get(Calendar.SECOND) + "]";
+	        timeStr4 = militaryTime4 + twelveHourTime4;
+	        
+	        String s = clock3.getText();
+	        s+= "\n" + newClockNames.get(i) + "\n" + dateStr + "\n" + timeStr4;
+	        clock3.setText(s);
+		}
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
@@ -88,17 +114,24 @@ public class Clocks implements ActionListener {
 	        String militaryTime3 = c3.get(Calendar.HOUR_OF_DAY) + ":" + c3.get(Calendar.MINUTE) + ":" + c3.get(Calendar.SECOND);
 	        String twelveHourTime3 = " [" + c3.get(Calendar.HOUR) + ":" + c3.get(Calendar.MINUTE) + ":" + c3.get(Calendar.SECOND) + "]";
 	        timeStr3 = militaryTime3 + twelveHourTime3;
-	        
+	
+	        //changing text
 	        System.out.println(timeStr);
 	        textArea.setText(city + "\n" + dateStr + "\n" + timeStr);
 	        clock2.setText(city2 + "\n" + dateStr + "\n" + timeStr2);
 	        clock3.setText(city3 + "\n" + dateStr + "\n" + timeStr3);
+	        
+	        DisplayClocks();
+	        
 	        frame.pack();
 	        
-	        
+	   
 	        if(e.getSource()==add) {
-	        	NewClocks clockk = new NewClocks();
-	        	clockk.AddClock();
+	        	
+	        	newCity = JOptionPane.showInputDialog("What city? (Format: (City, Country))");
+	        	newClockNames.add(newCity);
+	        	timeZone4 = clockUtil.getTimeZoneFromCityName(newCity);
+	        	AddClock();
 	        }
 	}
 	
